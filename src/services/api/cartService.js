@@ -15,13 +15,15 @@ export const cartService = {
       throw new Error("Cart item not found");
     }
     return { ...item };
-  },
+},
 
   async create(item) {
     await delay(300);
     const newItem = {
       ...item,
-      Id: cartData.length > 0 ? Math.max(...cartData.map(c => c.Id)) + 1 : 1
+      Id: cartData.length > 0 ? Math.max(...cartData.map(c => c.Id)) + 1 : 1,
+      addedAt: new Date().toISOString(),
+      quantity: item.quantity || 1
     };
     cartData.push(newItem);
     return { ...newItem };
@@ -29,14 +31,20 @@ export const cartService = {
 
   async update(id, data) {
     await delay(250);
+    if (!Number.isInteger(id) || id < 1) {
+      throw new Error('Invalid cart item ID');
+    }
     const index = cartData.findIndex(c => c.Id === id);
     if (index === -1) {
       throw new Error("Cart item not found");
     }
-    cartData[index] = { ...cartData[index], ...data };
+    cartData[index] = { 
+      ...cartData[index], 
+      ...data,
+      updatedAt: new Date().toISOString()
+    };
     return { ...cartData[index] };
   },
-
   async delete(id) {
     await delay(200);
     const index = cartData.findIndex(c => c.Id === id);

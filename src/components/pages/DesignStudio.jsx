@@ -263,14 +263,14 @@ ${calculatePrice().toFixed(2)}
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <DesignCanvas
-product={product}
+<DesignCanvas
+              ref={canvasRef}
+              product={product}
               design={design}
               selectedColor={selectedColor}
               onDesignUpdate={handleDesignUpdate}
               onColorChange={setSelectedColor}
               onDownloadMockup={() => setShowDownloadModal(true)}
-              canvasRef={canvasRef}
             />
             {/* Product Options */}
             <div className="bg-white rounded-xl shadow-sm p-6">

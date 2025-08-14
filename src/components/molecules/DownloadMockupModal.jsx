@@ -20,42 +20,52 @@ const DownloadMockupModal = ({ isOpen, onClose, canvasRef, product, design }) =>
     { value: 'JPG', label: 'JPG', desc: 'Smaller file size, white background' }
   ];
 
-  const handleDownload = async () => {
-    if (!canvasRef?.current || !design) {
+const handleDownload = async () => {
+    if (!canvasRef?.current) {
+      toast.error('Canvas not available for download');
+      return;
+    }
+    if (!design) {
       toast.error('No design to download');
       return;
     }
 
     setIsDownloading(true);
     
-    try {
+try {
       // Dynamically import html2canvas
       const html2canvas = (await import('html2canvas')).default;
       
       const [width, height] = selectedResolution.split('x').map(Number);
       const canvas = canvasRef.current;
       
-      // Create high-resolution canvas
+      // Create high-resolution canvas with enhanced options
       const screenshot = await html2canvas(canvas, {
         width: canvas.offsetWidth,
         height: canvas.offsetHeight,
         scale: Math.max(width / canvas.offsetWidth, height / canvas.offsetHeight),
         useCORS: true,
         allowTaint: true,
-        backgroundColor: selectedFormat === 'JPG' ? '#FFFFFF' : null
+        backgroundColor: selectedFormat === 'JPG' ? '#FFFFFF' : null,
+        logging: false,
+        imageTimeout: 0,
+        removeContainer: true
       });
 
-      // Create download link
+// Create download link with better filename and quality
       const link = document.createElement('a');
-      const filename = `${product?.name || 'mockup'}-${selectedResolution}.${selectedFormat.toLowerCase()}`;
+      const sanitizedProductName = product?.name?.replace(/[^a-z0-9]/gi, '-').toLowerCase() || 'mockup';
+      const timestamp = new Date().toISOString().slice(0, 10);
+      const filename = `${sanitizedProductName}-${timestamp}-${selectedResolution}.${selectedFormat.toLowerCase()}`;
       
       if (selectedFormat === 'PNG') {
         link.href = screenshot.toDataURL('image/png');
       } else {
-        link.href = screenshot.toDataURL('image/jpeg', 0.95);
+        link.href = screenshot.toDataURL('image/jpeg', 0.98);
       }
       
       link.download = filename;
+      link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

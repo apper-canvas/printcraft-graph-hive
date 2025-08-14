@@ -17,7 +17,7 @@ export const templateService = {
     return { ...template };
   },
 
-  async getByCategory(category) {
+async getByCategory(category) {
     await delay(300);
     return templateData.filter(t => t.category === category).map(t => ({ ...t }));
   },
@@ -26,19 +26,27 @@ export const templateService = {
     await delay(400);
     const newTemplate = {
       ...template,
-      Id: Math.max(...templateData.map(t => t.Id)) + 1
+      Id: templateData.length > 0 ? Math.max(...templateData.map(t => t.Id)) + 1 : 1,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     };
     templateData.push(newTemplate);
     return { ...newTemplate };
   },
-
-  async update(id, data) {
+async update(id, data) {
     await delay(300);
+    if (!Number.isInteger(id) || id < 1) {
+      throw new Error('Invalid template ID');
+    }
     const index = templateData.findIndex(t => t.Id === id);
     if (index === -1) {
       throw new Error("Template not found");
     }
-    templateData[index] = { ...templateData[index], ...data };
+    templateData[index] = { 
+      ...templateData[index], 
+      ...data,
+      updatedAt: new Date().toISOString()
+    };
     return { ...templateData[index] };
   },
 

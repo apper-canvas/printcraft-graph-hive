@@ -1,4 +1,4 @@
-import savedDesignData from '@/services/mockData/savedDesigns.json';
+import savedDesignData from "@/services/mockData/savedDesigns.json";
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -6,7 +6,6 @@ function delay(ms) {
 
 let mockSavedDesigns = [...savedDesignData];
 let nextId = Math.max(...mockSavedDesigns.map(d => d.Id), 0) + 1;
-
 export const savedDesignService = {
   async getAll() {
     await delay(300);
@@ -22,12 +21,14 @@ export const savedDesignService = {
     return design ? { ...design } : null;
   },
 
-  async create(designData) {
+async create(designData) {
     await delay(400);
     const newDesign = {
       ...designData,
       Id: nextId++,
-      savedAt: new Date().toISOString()
+      savedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      version: 1
     };
     mockSavedDesigns.push(newDesign);
     return { ...newDesign };
@@ -42,8 +43,13 @@ export const savedDesignService = {
     if (index === -1) {
       throw new Error('Saved design not found');
     }
-    mockSavedDesigns[index] = { ...mockSavedDesigns[index], ...updateData };
-    return { ...mockSavedDesigns[index] };
+    mockSavedDesigns[index] = { 
+      ...mockSavedDesigns[index], 
+      ...updateData,
+      updatedAt: new Date().toISOString(),
+      version: (mockSavedDesigns[index].version || 1) + 1
+    };
+return { ...mockSavedDesigns[index] };
   },
 
   async delete(id) {

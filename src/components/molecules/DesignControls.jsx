@@ -25,9 +25,9 @@ const DesignControls = ({
       </div>
 
       <div className="space-y-4">
-        <div>
+<div>
           <label className="block text-sm font-medium text-gray-700 mb-3">
-            Size: {Math.round(design.size.width * 100)}px
+            Size: {Math.round(design.size.width)}px × {Math.round(design.size.height)}px
           </label>
           <input
             type="range"
@@ -81,20 +81,21 @@ const DesignControls = ({
 
       <div className="pt-4 border-t border-gray-100">
         <div className="grid grid-cols-2 gap-3">
-          <Button
+<Button
             variant="outline"
             size="sm"
-            onClick={() => onPositionChange({ x: 200, y: 200 })}
+            onClick={() => onPositionChange({ x: 125, y: 175 })}
             icon="Target"
           >
             Center
           </Button>
-          <Button
+<Button
             variant="ghost"
             size="sm"
             onClick={() => {
               onSizeChange(150);
               onRotationChange(0);
+              onPositionChange({ x: 125, y: 175 });
             }}
             icon="RotateCcw"
           >

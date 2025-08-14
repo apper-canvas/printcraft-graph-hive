@@ -1,19 +1,32 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 
-const DesignCanvas = ({ 
+const DesignCanvas = React.forwardRef(({ 
   product, 
   design, 
   selectedColor,
   onDesignUpdate,
   onColorChange,
   onDownloadMockup
-}) => {
-  const [isDragging, setIsDragging] = useState(false);
+}, ref) => {
+const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
   const canvasRef = useRef(null);
 
+  // Forward ref to parent component
+  React.useImperativeHandle(ref, () => canvasRef.current);
+
+  // Color hue calculation for product color changes
+  const getColorHue = (color) => {
+    if (color === "#FFFFFF") return 0;
+    if (color === "#000000") return 0;
+    if (color === "#FF0000") return 0;
+    if (color === "#00FF00") return 120;
+    if (color === "#0000FF") return 240;
+    return 0;
+  };
   const handleMouseDown = (e) => {
     if (!design) return;
     
@@ -101,13 +114,15 @@ const DesignCanvas = ({
         </div>
 
         {/* Canvas */}
-        <div className="relative">
+<div className="relative">
           <h3 className="font-medium text-gray-900 mb-3">Product Preview:</h3>
           <div 
-ref={canvasRef}
-            className="design-canvas bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl relative mx-auto"
+            ref={canvasRef}
+            className="design-canvas bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl relative mx-auto border-2 border-dashed border-transparent hover:border-primary/30 transition-all duration-200"
             style={{ width: "400px", height: "500px" }}
             onMouseDown={handleMouseDown}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             {/* Download Mockup Button */}
             {design && (
@@ -152,11 +167,15 @@ ref={canvasRef}
                   draggable={false}
                 />
                 
-                {/* Resize Handles */}
-                <div className="resize-handle top-left" />
-                <div className="resize-handle top-right" />
-                <div className="resize-handle bottom-left" />
-                <div className="resize-handle bottom-right" />
+{/* Resize Handles - Only show when hovered or dragging */}
+                {(isHovered || isDragging) && (
+                  <>
+                    <div className="resize-handle top-left animate-pulse" />
+                    <div className="resize-handle top-right animate-pulse" />
+                    <div className="resize-handle bottom-left animate-pulse" />
+                    <div className="resize-handle bottom-right animate-pulse" />
+                  </>
+                )}
               </div>
             )}
             
@@ -182,25 +201,12 @@ ref={canvasRef}
               <ApperIcon name="Info" className="w-4 h-4" />
               <span>Drag your design to reposition it on the product</span>
             </div>
-          </div>
-        )}
+)}
       </div>
     </div>
   );
-};
+});
 
-// Helper function to get hue rotation for color approximation
-const getColorHue = (color) => {
-  const colorMap = {
-    "#000000": 0,
-    "#FF0000": 0,
-    "#00FF00": 120,
-    "#0000FF": 240,
-    "#FFFF00": 60,
-    "#FF00FF": 300,
-    "#00FFFF": 180
-  };
-  return colorMap[color?.toUpperCase()] || 0;
-};
+DesignCanvas.displayName = "DesignCanvas";
 
 export default DesignCanvas;
