@@ -1,12 +1,43 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SizeChartOverlay from "@/components/molecules/SizeChartOverlay";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
+  const [showSizeChart, setShowSizeChart] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+  const sizeInfoRef = useRef(null);
+  const sizeGuideRef = useRef(null);
 
+  const handleMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+    const timeout = setTimeout(() => {
+      setShowSizeChart(true);
+    }, 500); // 500ms delay for hover
+    setHoverTimeout(timeout);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    // Small delay to allow moving to overlay
+    setTimeout(() => {
+      if (!showSizeChart) return;
+      setShowSizeChart(false);
+    }, 150);
+  };
+
+  const handleSizeGuideClick = (e) => {
+    e.stopPropagation();
+    setShowSizeChart(true);
+  };
   const handleDesignClick = () => {
     navigate(`/design/${product.Id}`);
   };
@@ -31,9 +62,25 @@ const ProductCard = ({ product }) => {
             <Badge variant="primary" size="sm">
               <ApperIcon name="DollarSign" className="w-3 h-3 mr-1" />
               From ${product.basePrice}
-            </Badge>
-            <div className="flex items-center space-x-1">
-              <span className="text-xs text-gray-500">{product.sizes.length} sizes</span>
+</Badge>
+            <div className="flex items-center justify-between">
+              <div
+                ref={sizeInfoRef}
+                className="flex items-center space-x-1 cursor-help"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                <span className="text-xs text-gray-500">{product.sizes.length} sizes</span>
+                <ApperIcon name="Info" size={12} className="text-gray-400" />
+              </div>
+              
+              <button
+                ref={sizeGuideRef}
+                onClick={handleSizeGuideClick}
+                className="text-xs text-primary hover:text-primary-light transition-colors duration-200 font-medium"
+              >
+                Size Guide
+              </button>
             </div>
           </div>
         </div>
@@ -61,7 +108,15 @@ const ProductCard = ({ product }) => {
             Start Designing
           </Button>
         </div>
-      </div>
+</div>
+      
+      {/* Size Chart Overlay */}
+      <SizeChartOverlay
+        isVisible={showSizeChart}
+        onClose={() => setShowSizeChart(false)}
+        product={product}
+        triggerRef={showSizeChart ? (sizeInfoRef.current ? sizeInfoRef : sizeGuideRef) : null}
+      />
     </div>
   );
 };
