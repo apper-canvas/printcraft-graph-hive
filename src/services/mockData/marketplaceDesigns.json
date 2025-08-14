@@ -1,0 +1,170 @@
+[
+  {
+    "Id": 1,
+    "title": "Vintage Sunset Waves",
+    "description": "A beautiful retro-style design featuring sunset colors and wave patterns perfect for apparel and accessories.",
+    "previewUrl": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&h=400&fit=crop",
+    "category": "vintage",
+    "price": 12.99,
+    "tags": ["vintage", "sunset", "waves", "retro", "orange"],
+    "creator": {
+      "name": "Alex Rivera",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+    },
+    "downloads": 1247,
+    "likes": 324,
+    "rating": 4.8,
+    "isPurchased": false,
+    "createdAt": "2024-01-15",
+    "fileTypes": ["PNG", "SVG", "PSD"],
+    "dimensions": "3000x3000px",
+    "license": "Commercial Use"
+  },
+  {
+    "Id": 2,
+    "title": "Minimalist Line Art",
+    "description": "Clean and modern line art design perfect for contemporary branding and minimalist aesthetics.",
+    "previewUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    "category": "modern",
+    "price": 0,
+    "tags": ["minimalist", "line art", "modern", "clean", "black"],
+    "creator": {
+      "name": "Sarah Chen",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+    },
+    "downloads": 2853,
+    "likes": 567,
+    "rating": 4.9,
+    "isPurchased": false,
+    "createdAt": "2024-01-20",
+    "fileTypes": ["PNG", "SVG"],
+    "dimensions": "2400x2400px",
+    "license": "Personal & Commercial Use"
+  },
+  {
+    "Id": 3,
+    "title": "Typography Quotes Bundle",
+    "description": "Collection of 10 inspirational typography designs with various fonts and layouts.",
+    "previewUrl": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop",
+    "category": "typography",
+    "price": 24.99,
+    "tags": ["typography", "quotes", "inspiration", "bundle", "fonts"],
+    "creator": {
+      "name": "Marcus Johnson",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+    },
+    "downloads": 892,
+    "likes": 203,
+    "rating": 4.7,
+    "isPurchased": true,
+    "createdAt": "2024-01-10",
+    "fileTypes": ["PNG", "PDF", "AI"],
+    "dimensions": "Various",
+    "license": "Commercial Use"
+  },
+  {
+    "Id": 4,
+    "title": "Geometric Patterns Pack",
+    "description": "Set of 6 seamless geometric patterns in various color combinations.",
+    "previewUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=400&fit=crop",
+    "category": "patterns",
+    "price": 8.99,
+    "tags": ["geometric", "patterns", "seamless", "colorful", "abstract"],
+    "creator": {
+      "name": "Emma Thompson",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+    },
+    "downloads": 1567,
+    "likes": 412,
+    "rating": 4.6,
+    "isPurchased": false,
+    "createdAt": "2024-01-25",
+    "fileTypes": ["PNG", "SVG", "PAT"],
+    "dimensions": "1200x1200px",
+    "license": "Commercial Use"
+  },
+  {
+    "Id": 5,
+    "title": "Hand-drawn Nature Icons",
+    "description": "Beautiful hand-drawn nature and outdoor themed icons perfect for eco-friendly brands.",
+    "previewUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop",
+    "category": "graphics",
+    "price": 15.99,
+    "tags": ["nature", "icons", "hand-drawn", "eco", "outdoor"],
+    "creator": {
+      "name": "David Park",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
+    },
+    "downloads": 743,
+    "likes": 189,
+    "rating": 4.8,
+    "isPurchased": false,
+    "createdAt": "2024-01-30",
+    "fileTypes": ["PNG", "SVG", "AI"],
+    "dimensions": "512x512px",
+    "license": "Commercial Use"
+  },
+  {
+    "Id": 6,
+    "title": "Retro Logo Collection",
+    "description": "Vintage-inspired logo designs and badges perfect for brand identity projects.",
+    "previewUrl": "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=400&h=400&fit=crop",
+    "category": "logos",
+    "price": 19.99,
+    "tags": ["retro", "logo", "vintage", "badge", "branding"],
+    "creator": {
+      "name": "Lisa Wang",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+    },
+    "downloads": 634,
+    "likes": 156,
+    "rating": 4.5,
+    "isPurchased": false,
+    "createdAt": "2024-02-01",
+    "fileTypes": ["PNG", "SVG", "AI", "EPS"],
+    "dimensions": "Various",
+    "license": "Commercial Use"
+  },
+  {
+    "Id": 7,
+    "title": "Abstract Watercolor Textures",
+    "description": "Soft watercolor textures and backgrounds perfect for elegant designs.",
+    "previewUrl": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=400&fit=crop",
+    "category": "graphics",
+    "price": 7.99,
+    "tags": ["watercolor", "texture", "abstract", "soft", "elegant"],
+    "creator": {
+      "name": "Anna Rodriguez",
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face"
+    },
+    "downloads": 1923,
+    "likes": 478,
+    "rating": 4.9,
+    "isPurchased": true,
+    "createdAt": "2024-02-05",
+    "fileTypes": ["PNG", "JPG", "PSD"],
+    "dimensions": "4000x3000px",
+    "license": "Commercial Use"
+  },
+  {
+    "Id": 8,
+    "title": "Modern Tech Icons",
+    "description": "Clean and modern technology icons perfect for digital products and apps.",
+    "previewUrl": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop",
+    "category": "graphics",
+    "price": 0,
+    "tags": ["tech", "icons", "modern", "digital", "clean"],
+    "creator": {
+      "name": "Ryan Kim",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+    },
+    "downloads": 3156,
+    "likes": 721,
+    "rating": 4.8,
+    "isPurchased": false,
+    "createdAt": "2024-02-08",
+    "fileTypes": ["PNG", "SVG"],
+    "dimensions": "256x256px",
+    "license": "Personal & Commercial Use"
+  }
+]

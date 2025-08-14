@@ -12,23 +12,16 @@ const Header = ({ cartItemCount, onCartOpen }) => {
     { to: "/", label: "Products", icon: "Package" },
     { to: "/templates", label: "Templates", icon: "Palette" }
   ];
-
-  return (
-    <header className="bg-white/95 backdrop-blur-lg sticky top-0 z-40 border-b border-gray-100">
+return (
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <NavLink 
-            to="/" 
-            className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200"
-          >
-            <div className="bg-gradient-to-r from-primary to-primary-light p-2 rounded-xl">
-              <ApperIcon name="Palette" className="w-6 h-6 text-white" />
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <h1 className="text-2xl font-bold text-primary">Apper</h1>
             </div>
-            <span className="font-display font-bold text-xl bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
-              PrintCraft
-            </span>
-          </NavLink>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">

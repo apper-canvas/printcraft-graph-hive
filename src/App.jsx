@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Marketplace from "@/components/pages/Marketplace";
 import Header from "@/components/organisms/Header";
 import CartSidebar from "@/components/molecules/CartSidebar";
-import ProductCatalog from "@/components/pages/ProductCatalog";
 import DesignStudio from "@/components/pages/DesignStudio";
-import { cartService } from "@/services/api/cartService";
+import ProductCatalog from "@/components/pages/ProductCatalog";
+import { cartService } from "@/services/cartService";
 import { toast } from "react-toastify";
-
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -60,11 +61,12 @@ function App() {
         />
         
         <main>
-          <Routes>
-            <Route path="/" element={<ProductCatalog />} />
-            <Route path="/design/:productId" element={<DesignStudio />} />
-          </Routes>
-        </main>
+<Routes>
+<Route path="/" element={<ProductCatalog />} />
+<Route path="/design/:productId" element={<DesignStudio />} />
+<Route path="/marketplace" element={<Marketplace />} />
+</Routes>
+</main>
 
         <CartSidebar
           isOpen={isCartOpen}
