@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import SavedDesignsGallery from "@/components/molecules/SavedDesignsGallery";
+import DownloadMockupModal from "@/components/molecules/DownloadMockupModal";
 import { productService } from "@/services/api/productService";
 import { templateService } from "@/services/api/templateService";
 import { cartService } from "@/services/api/cartService";
@@ -20,6 +21,8 @@ const DesignStudio = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
 
+const canvasRef = useRef(null);
+
   // Product state
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -35,8 +38,12 @@ const DesignStudio = () => {
   const [templates, setTemplates] = useState([]);
   const [templatesLoading, setTemplatesLoading] = useState(false);
   const [showTemplates, setShowTemplates] = useState(false);
-const [savedDesigns, setSavedDesigns] = useState([]);
+  const [savedDesigns, setSavedDesigns] = useState([]);
   const [showSavedDesigns, setShowSavedDesigns] = useState(false);
+
+  // Download modal state
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
+
   // Load product
   const loadProduct = async () => {
     try {
@@ -257,13 +264,14 @@ ${calculatePrice().toFixed(2)}
             className="space-y-6"
           >
             <DesignCanvas
-              product={product}
+product={product}
               design={design}
               selectedColor={selectedColor}
               onDesignUpdate={handleDesignUpdate}
               onColorChange={setSelectedColor}
+              onDownloadMockup={() => setShowDownloadModal(true)}
+              canvasRef={canvasRef}
             />
-
             {/* Product Options */}
             <div className="bg-white rounded-xl shadow-sm p-6">
               <h3 className="font-display font-bold text-lg text-gray-900 mb-4">Product Options</h3>
@@ -421,6 +429,15 @@ ${calculatePrice().toFixed(2)}
         loading={false}
         onSelectDesign={handleSelectSavedDesign}
         onDeleteDesign={handleDeleteSavedDesign}
+/>
+
+      {/* Download Mockup Modal */}
+      <DownloadMockupModal
+        isOpen={showDownloadModal}
+        onClose={() => setShowDownloadModal(false)}
+        canvasRef={canvasRef}
+        product={product}
+        design={design}
       />
     </div>
   );

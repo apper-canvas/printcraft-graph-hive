@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 
@@ -7,7 +7,8 @@ const DesignCanvas = ({
   design, 
   selectedColor,
   onDesignUpdate,
-  onColorChange 
+  onColorChange,
+  onDownloadMockup
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
@@ -103,11 +104,25 @@ const DesignCanvas = ({
         <div className="relative">
           <h3 className="font-medium text-gray-900 mb-3">Product Preview:</h3>
           <div 
-            ref={canvasRef}
+ref={canvasRef}
             className="design-canvas bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl relative mx-auto"
             style={{ width: "400px", height: "500px" }}
             onMouseDown={handleMouseDown}
           >
+            {/* Download Mockup Button */}
+            {design && (
+              <div className="absolute top-3 right-3 z-10">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onDownloadMockup}
+                  icon="Download"
+                  className="bg-white/90 backdrop-blur-sm hover:bg-white shadow-sm"
+                >
+                  Download Mockup
+                </Button>
+              </div>
+            )}
             {/* Product Mockup */}
             <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-xl"
