@@ -1,9 +1,9 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BulkOrderCalculator from "@/components/molecules/BulkOrderCalculator";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
-
 const CartSidebar = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) => {
   const total = cartItems.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
 
@@ -101,8 +101,19 @@ const CartSidebar = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveIte
                           </p>
                         </div>
                       </div>
-                    </div>
+</div>
                   ))}
+                  
+                  {/* Bulk Order Calculator for Cart */}
+                  {cartItems.length > 0 && (
+                    <div className="mt-6 pt-6 border-t border-gray-200">
+                      <BulkOrderCalculator 
+                        product={cartItems[0]} // Use first cart item as reference
+                        selectedQuantity={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+                        className="border-0 bg-gradient-to-r from-primary/5 to-primary-light/5"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>

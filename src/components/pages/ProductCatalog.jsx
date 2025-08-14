@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ProductGrid from "@/components/organisms/ProductGrid";
+import BulkOrderCalculator from "@/components/molecules/BulkOrderCalculator";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import { productService } from "@/services/api/productService";
@@ -92,6 +93,39 @@ const ProductCatalog = () => {
               ))}
             </div>
           </div>
+        </div>
+</section>
+
+      {/* Bulk Order Calculator Section */}
+      <section className="py-12 bg-gradient-to-r from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-center mb-8"
+          >
+            <h2 className="font-display font-bold text-3xl text-gray-900 mb-4">
+              Save More with Bulk Orders
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Get better pricing as your quantity increases. Perfect for teams, events, and businesses.
+            </p>
+          </motion.div>
+          
+          {!loading && !error && products.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="max-w-2xl mx-auto"
+            >
+              <BulkOrderCalculator 
+                product={products[0]} // Show calculator with first product as example
+                selectedQuantity={25}
+              />
+            </motion.div>
+          )}
         </div>
       </section>
 

@@ -8,6 +8,28 @@ export const productService = {
     return [...productData];
   },
 
+  async getBulkPricing(productId, quantity) {
+    await delay(100);
+    const product = productData.find(p => p.Id === productId);
+    if (!product) {
+      throw new Error("Product not found");
+    }
+    
+    const quantityBreaks = product.quantityBreaks || [];
+    const tier = quantityBreaks.find(tier => 
+      quantity >= tier.min && (tier.max === null || quantity <= tier.max)
+    );
+    
+    return {
+      product: { ...product },
+      tier: tier || { min: 1, max: null, discount: 0, price: product.basePrice },
+      quantity,
+      unitPrice: tier?.price || product.basePrice,
+      totalPrice: (tier?.price || product.basePrice) * quantity,
+      savings: tier ? (product.basePrice - tier.price) * quantity : 0
+    };
+  },
+
   async getById(id) {
     await delay(200);
     const product = productData.find(p => p.Id === id);

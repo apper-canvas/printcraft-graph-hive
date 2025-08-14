@@ -1,5 +1,5 @@
 [
-  {
+{
     "Id": 1,
     "name": "Classic T-Shirt",
     "category": "apparel",
@@ -7,9 +7,16 @@
     "colors": ["#FFFFFF", "#000000", "#FF0000", "#0000FF", "#00FF00"],
     "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
     "printAreas": ["front", "back"],
-    "mockupUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop"
+    "mockupUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop",
+    "quantityBreaks": [
+      { "min": 1, "max": 9, "discount": 0, "price": 19.99 },
+      { "min": 10, "max": 24, "discount": 0.10, "price": 17.99 },
+      { "min": 25, "max": 49, "discount": 0.15, "price": 16.99 },
+      { "min": 50, "max": 99, "discount": 0.20, "price": 15.99 },
+      { "min": 100, "max": null, "discount": 0.25, "price": 14.99 }
+    ]
   },
-  {
+{
     "Id": 2,
     "name": "Premium Hoodie",
     "category": "apparel", 
@@ -17,9 +24,16 @@
     "colors": ["#FFFFFF", "#000000", "#808080", "#FF0000"],
     "sizes": ["S", "M", "L", "XL", "XXL"],
     "printAreas": ["front", "back", "sleeve"],
-    "mockupUrl": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop"
+    "mockupUrl": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop",
+    "quantityBreaks": [
+      { "min": 1, "max": 9, "discount": 0, "price": 49.99 },
+      { "min": 10, "max": 24, "discount": 0.10, "price": 44.99 },
+      { "min": 25, "max": 49, "discount": 0.15, "price": 42.49 },
+      { "min": 50, "max": 99, "discount": 0.20, "price": 39.99 },
+      { "min": 100, "max": null, "discount": 0.25, "price": 37.49 }
+    ]
   },
-  {
+{
     "Id": 3,
     "name": "Coffee Mug",
     "category": "drinkware",
@@ -27,9 +41,16 @@
     "colors": ["#FFFFFF", "#000000", "#FF0000", "#0000FF"],
     "sizes": ["11oz", "15oz"],
     "printAreas": ["wrap", "handle"],
-    "mockupUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=500&fit=crop"
+    "mockupUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=500&fit=crop",
+    "quantityBreaks": [
+      { "min": 1, "max": 9, "discount": 0, "price": 14.99 },
+      { "min": 10, "max": 24, "discount": 0.12, "price": 13.19 },
+      { "min": 25, "max": 49, "discount": 0.18, "price": 12.29 },
+      { "min": 50, "max": 99, "discount": 0.22, "price": 11.69 },
+      { "min": 100, "max": null, "discount": 0.28, "price": 10.79 }
+    ]
   },
-  {
+{
     "Id": 4,
     "name": "Canvas Tote Bag",
     "category": "bags",
@@ -37,9 +58,16 @@
     "colors": ["#F5F5DC", "#000000", "#FF0000", "#0000FF"],
     "sizes": ["Standard"],
     "printAreas": ["front", "back"],
-    "mockupUrl": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=500&fit=crop"
+    "mockupUrl": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=500&fit=crop",
+    "quantityBreaks": [
+      { "min": 1, "max": 9, "discount": 0, "price": 16.99 },
+      { "min": 10, "max": 24, "discount": 0.08, "price": 15.63 },
+      { "min": 25, "max": 49, "discount": 0.14, "price": 14.61 },
+      { "min": 50, "max": 99, "discount": 0.18, "price": 13.93 },
+      { "min": 100, "max": null, "discount": 0.23, "price": 13.08 }
+    ]
   },
-  {
+{
     "Id": 5,
     "name": "Baseball Cap",
     "category": "accessories",
@@ -47,9 +75,16 @@
     "colors": ["#000000", "#FFFFFF", "#FF0000", "#0000FF", "#00FF00"],
     "sizes": ["Adjustable"],
     "printAreas": ["front", "back", "side"],
-    "mockupUrl": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=500&fit=crop"
+    "mockupUrl": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=500&fit=crop",
+    "quantityBreaks": [
+      { "min": 1, "max": 9, "discount": 0, "price": 24.99 },
+      { "min": 10, "max": 24, "discount": 0.10, "price": 22.49 },
+      { "min": 25, "max": 49, "discount": 0.16, "price": 20.99 },
+      { "min": 50, "max": 99, "discount": 0.20, "price": 19.99 },
+      { "min": 100, "max": null, "discount": 0.26, "price": 18.49 }
+    ]
   },
-  {
+{
     "Id": 6,
     "name": "Tank Top",
     "category": "apparel",
@@ -57,9 +92,16 @@
     "colors": ["#FFFFFF", "#000000", "#FF0000", "#FFFF00"],
     "sizes": ["XS", "S", "M", "L", "XL"],
     "printAreas": ["front", "back"],
-    "mockupUrl": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=500&fit=crop"
+    "mockupUrl": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=500&fit=crop",
+    "quantityBreaks": [
+      { "min": 1, "max": 9, "discount": 0, "price": 17.99 },
+      { "min": 10, "max": 24, "discount": 0.11, "price": 16.01 },
+      { "min": 25, "max": 49, "discount": 0.17, "price": 14.94 },
+      { "min": 50, "max": 99, "discount": 0.22, "price": 14.03 },
+      { "min": 100, "max": null, "discount": 0.27, "price": 13.13 }
+    ]
   },
-  {
+{
     "Id": 7,
     "name": "Water Bottle",
     "category": "drinkware",
@@ -67,9 +109,16 @@
     "colors": ["#FFFFFF", "#000000", "#0000FF", "#FF1493"],
     "sizes": ["20oz", "32oz"],
     "printAreas": ["wrap"],
-    "mockupUrl": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=500&fit=crop"
+    "mockupUrl": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=500&fit=crop",
+    "quantityBreaks": [
+      { "min": 1, "max": 9, "discount": 0, "price": 22.99 },
+      { "min": 10, "max": 24, "discount": 0.09, "price": 20.92 },
+      { "min": 25, "max": 49, "discount": 0.15, "price": 19.54 },
+      { "min": 50, "max": 99, "discount": 0.19, "price": 18.62 },
+      { "min": 100, "max": null, "discount": 0.24, "price": 17.47 }
+    ]
   },
-  {
+{
     "Id": 8,
     "name": "Phone Case",
     "category": "accessories",
@@ -77,6 +126,13 @@
     "colors": ["#FFFFFF", "#000000", "#FF1493", "#00FFFF"],
     "sizes": ["iPhone 14", "iPhone 14 Pro", "Samsung Galaxy"],
     "printAreas": ["back"],
-    "mockupUrl": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=500&fit=crop"
+    "mockupUrl": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=500&fit=crop",
+    "quantityBreaks": [
+      { "min": 1, "max": 9, "discount": 0, "price": 19.99 },
+      { "min": 10, "max": 24, "discount": 0.12, "price": 17.59 },
+      { "min": 25, "max": 49, "discount": 0.18, "price": 16.39 },
+      { "min": 50, "max": 99, "discount": 0.23, "price": 15.39 },
+      { "min": 100, "max": null, "discount": 0.28, "price": 14.39 }
+    ]
   }
 ]
