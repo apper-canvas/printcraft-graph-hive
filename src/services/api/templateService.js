@@ -3,7 +3,7 @@ import templateData from "@/services/mockData/templates.json";
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const templateService = {
-  async getAll() {
+async getAll() {
     await delay(400);
     return [...templateData];
   },
