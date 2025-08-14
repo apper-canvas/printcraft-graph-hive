@@ -195,13 +195,14 @@ const [isDragging, setIsDragging] = useState(false);
         </div>
 
         {/* Canvas Instructions */}
-        {design && (
+{design && (
           <div className="bg-primary/5 rounded-lg p-4">
             <div className="flex items-center space-x-2 text-primary text-sm">
               <ApperIcon name="Info" className="w-4 h-4" />
               <span>Drag your design to reposition it on the product</span>
             </div>
-)}
+          </div>
+        )}
       </div>
     </div>
   );
