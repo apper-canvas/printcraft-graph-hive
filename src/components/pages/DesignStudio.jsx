@@ -106,7 +106,7 @@ async function loadSavedDesigns() {
     toast.success(`Template "${template.name}" applied!`);
   };
 async function handleSaveDesign() {
-    if (!currentDesign) {
+    if (!design) {
       toast.error('No design to save');
       return;
     }
@@ -115,8 +115,8 @@ async function handleSaveDesign() {
       const designName = `Design ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
       await savedDesignService.create({
         name: designName,
-        designUrl: currentDesign.url,
-        thumbnailUrl: currentDesign.url,
+        designUrl: design.url,
+        thumbnailUrl: design.url,
         productId: product?.Id,
         productName: product?.name
       });
@@ -148,10 +148,9 @@ async function handleSaveDesign() {
       toast.error('Failed to delete design');
     }
   }
-  const handleRemoveDesign = () => {
+const handleRemoveDesign = () => {
     setDesign(null);
     toast.info("Design removed");
-toast.info("Design removed");
   };
 
   const calculatePrice = () => {
@@ -224,11 +223,10 @@ toast.info("Design removed");
                 <ApperIcon name="DollarSign" className="w-4 h-4 mr-1" />
 ${calculatePrice().toFixed(2)}
               </Badge>
-              {design && (
+{design && (
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={handleSaveDesign}
                   onClick={handleSaveDesign}
                   icon="Bookmark"
                   className="ml-2"
