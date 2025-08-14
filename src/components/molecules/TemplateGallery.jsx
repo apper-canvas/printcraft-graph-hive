@@ -43,46 +43,64 @@ const TemplateGallery = ({ isOpen, onClose, templates, loading, onSelectTemplate
                 <Loading type="templates" />
               ) : (
                 <div className="space-y-8">
-                  {categories.map(category => (
-                    <div key={category}>
-                      <h3 className="font-display font-semibold text-lg text-gray-900 mb-4 capitalize">
-                        {category}
-                      </h3>
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {templates
-                          .filter(template => template.category === category)
-                          .map(template => (
-                            <motion.div
-                              key={template.Id}
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.98 }}
-                              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-200 cursor-pointer border border-gray-100"
-                              onClick={() => onSelectTemplate(template)}
-                            >
-                              <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
-                                <img 
-                                  src={template.thumbnailUrl} 
-                                  alt={template.name}
-                                  className="w-full h-full object-cover"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-200">
-                                  <div className="absolute bottom-2 left-2 right-2">
-                                    <Button size="sm" className="w-full text-xs">
-                                      Use Template
-                                    </Button>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="p-3">
-                                <h4 className="font-medium text-sm text-gray-900 truncate">
-                                  {template.name}
-                                </h4>
-                              </div>
-                            </motion.div>
-                          ))}
+{templates.length === 0 ? (
+                    <div className="text-center py-16">
+                      <div className="flex flex-col items-center space-y-4">
+                        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
+                          <ApperIcon name="Image" size={32} className="text-gray-400" />
+                        </div>
+                        <div>
+                          <h3 className="font-display font-semibold text-lg text-gray-900 mb-2">
+                            No Templates Available
+                          </h3>
+                          <p className="text-gray-500 max-w-md">
+                            There are currently no design templates available. Check back later for new templates.
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  ))}
+                  ) : (
+                    categories.map(category => (
+                      <div key={category}>
+                        <h3 className="font-display font-semibold text-lg text-gray-900 mb-4 capitalize">
+                          {category}
+                        </h3>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                          {templates
+                            .filter(template => template.category === category)
+                            .map(template => (
+                              <motion.div
+                                key={template.Id}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-200 cursor-pointer border border-gray-100"
+                                onClick={() => onSelectTemplate(template)}
+                              >
+                                <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+                                  <img 
+                                    src={template.thumbnailUrl} 
+                                    alt={template.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-200">
+                                    <div className="absolute bottom-2 left-2 right-2">
+                                      <Button size="sm" className="w-full text-xs">
+                                        Use Template
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="p-3">
+                                  <h4 className="font-medium text-sm text-gray-900 truncate">
+                                    {template.name}
+                                  </h4>
+                                </div>
+                              </motion.div>
+                            ))}
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
               )}
             </div>

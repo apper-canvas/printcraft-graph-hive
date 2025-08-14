@@ -67,7 +67,7 @@ const canvasRef = useRef(null);
       const data = await templateService.getAll();
       setTemplates(data);
     } catch (err) {
-      toast.error("Failed to load templates");
+toast.error("Failed to load design templates. Please try again.");
     } finally {
       setTemplatesLoading(false);
     }
