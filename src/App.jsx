@@ -6,7 +6,7 @@ import Header from "@/components/organisms/Header";
 import CartSidebar from "@/components/molecules/CartSidebar";
 import DesignStudio from "@/components/pages/DesignStudio";
 import ProductCatalog from "@/components/pages/ProductCatalog";
-import { cartService } from "@/services/cartService";
+import { cartService } from "@/services/api/cartService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
