@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import ProductGrid from "@/components/organisms/ProductGrid";
-import BulkOrderCalculator from "@/components/molecules/BulkOrderCalculator";
-import ApperIcon from "@/components/ApperIcon";
-import Button from "@/components/atoms/Button";
-import { productService } from "@/services/api/productService";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import ProductGrid from '@/components/organisms/ProductGrid';
+import BulkOrderCalculator from '@/components/molecules/BulkOrderCalculator';
+import FilterSidebar from '@/components/molecules/FilterSidebar';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
+import { productService } from '@/services/api/productService';
 
-const ProductCatalog = () => {
-  const [products, setProducts] = useState([]);
+function ProductCatalog() {
+const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-
+  const [filters, setFilters] = useState({
+    categories: [],
+    colors: [],
+    sizes: [],
+    types: []
+  });
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const loadProducts = async () => {
     try {
       setLoading(true);
@@ -30,15 +37,29 @@ const ProductCatalog = () => {
     loadProducts();
   }, []);
 
-  const filteredProducts = products.filter(product => {
+const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    
+    // Advanced filtering based on sidebar filters
+    const matchesCategoryFilter = filters.categories.length === 0 || 
+      filters.categories.includes(product.category);
+    
+    const matchesColorFilter = filters.colors.length === 0 || 
+      filters.colors.some(color => product.colors?.includes(color));
+    
+    const matchesSizeFilter = filters.sizes.length === 0 || 
+      filters.sizes.some(size => product.sizes?.includes(size));
+    
+    const matchesTypeFilter = filters.types.length === 0 || 
+      filters.types.includes(product.name.split(' ')[0]);
+    
+    return matchesSearch && matchesCategory && matchesCategoryFilter && 
+           matchesColorFilter && matchesSizeFilter && matchesTypeFilter;
   });
 
   const categories = ["all", ...new Set(products.map(p => p.category))];
-
-  return (
+return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary via-primary-light to-primary py-20">
@@ -66,27 +87,45 @@ const ProductCatalog = () => {
       <section className="py-8 bg-white/80 backdrop-blur-sm sticky top-16 z-30 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <ApperIcon name="Search" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200"
-              />
+            {/* Mobile Filter Toggle */}
+            <div className="flex items-center space-x-4 w-full md:w-auto">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsSidebarOpen(true)}
+                className="lg:hidden flex items-center space-x-2"
+              >
+                <ApperIcon name="Filter" size={16} />
+                <span>Filters</span>
+                {Object.values(filters).flat().length > 0 && (
+                  <span className="bg-primary text-white text-xs px-2 py-1 rounded-full">
+                    {Object.values(filters).flat().length}
+                  </span>
+                )}
+              </Button>
+              
+              {/* Search */}
+              <div className="relative flex-1 max-w-md">
+                <ApperIcon name="Search" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200"
+                />
+              </div>
             </div>
 
             {/* Category Filter */}
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 overflow-x-auto">
               {categories.map((category) => (
                 <Button
                   key={category}
                   variant={selectedCategory === category ? "primary" : "ghost"}
                   size="sm"
                   onClick={() => setSelectedCategory(category)}
-                  className="capitalize"
+                  className="capitalize whitespace-nowrap"
                 >
                   {category}
                 </Button>
@@ -94,83 +133,134 @@ const ProductCatalog = () => {
             </div>
           </div>
         </div>
-</section>
-
-      {/* Bulk Order Calculator Section */}
-      <section className="py-12 bg-gradient-to-r from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-center mb-8"
-          >
-            <h2 className="font-display font-bold text-3xl text-gray-900 mb-4">
-              Save More with Bulk Orders
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Get better pricing as your quantity increases. Perfect for teams, events, and businesses.
-            </p>
-          </motion.div>
-          
-          {!loading && !error && products.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-2xl mx-auto"
-            >
-              <BulkOrderCalculator 
-                product={products[0]} // Show calculator with first product as example
-                selectedQuantity={25}
-              />
-            </motion.div>
-          )}
-        </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {!loading && !error && (
-              <div className="mb-8 flex items-center justify-between">
-                <div>
-                  <h2 className="font-display font-bold text-2xl text-gray-900">
-                    {searchTerm || selectedCategory !== "all" 
-                      ? `Filtered Products (${filteredProducts.length})`
-                      : "All Products"
-                    }
-                  </h2>
-                  <p className="text-gray-600">Choose a product to start designing</p>
-                </div>
-                
-                <div className="hidden md:flex items-center space-x-4 text-sm text-gray-600">
-                  <div className="flex items-center space-x-2">
-                    <ApperIcon name="Truck" className="w-4 h-4" />
-                    <span>Free shipping over $50</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <ApperIcon name="Shield" className="w-4 h-4" />
-                    <span>Quality guarantee</span>
-                  </div>
-                </div>
-              </div>
-            )}
+{/* Main Content with Sidebar Layout */}
+      <div className="flex">
+        {/* Filter Sidebar */}
+        <FilterSidebar
+          products={products}
+          filters={filters}
+          onFiltersChange={setFilters}
+          isOpen={isSidebarOpen}
+          onToggle={() => setIsSidebarOpen(false)}
+        />
+        
+        {/* Main Content Area */}
+        <div className="flex-1">
+          {/* Bulk Order Calculator Section */}
+          <section className="py-12 bg-gradient-to-r from-gray-50 to-white">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-center mb-8"
+              >
+                <h2 className="font-display font-bold text-3xl text-gray-900 mb-4">
+                  Save More with Bulk Orders
+                </h2>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  Get better pricing as your quantity increases. Perfect for teams, events, and businesses.
+                </p>
+              </motion.div>
+              
+              {!loading && !error && products.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="max-w-2xl mx-auto"
+                >
+                  <BulkOrderCalculator 
+                    product={products[0]} // Show calculator with first product as example
+                    selectedQuantity={25}
+                  />
+                </motion.div>
+              )}
+            </div>
+          </section>
 
-            <ProductGrid 
-              products={filteredProducts}
-              loading={loading}
-              error={error}
-              onRetry={loadProducts}
-            />
-          </motion.div>
+          {/* Products Grid */}
+          <section className="py-12">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {!loading && !error && (
+                  <div className="mb-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <div>
+                      <h2 className="font-display font-bold text-2xl text-gray-900">
+                        {searchTerm || selectedCategory !== "all" || Object.values(filters).flat().length > 0
+                          ? `Filtered Products (${filteredProducts.length})`
+                          : "All Products"
+                        }
+                      </h2>
+                      <p className="text-gray-600">Choose a product to start designing</p>
+                      
+                      {/* Active Filters Display */}
+                      {Object.values(filters).flat().length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          {Object.entries(filters).map(([filterType, values]) => 
+                            values.map(value => (
+                              <span 
+                                key={`${filterType}-${value}`}
+                                className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary-light text-white"
+                              >
+                                {filterType === 'colors' ? (
+                                  <>
+                                    <span 
+                                      className="w-2 h-2 rounded-full mr-1 border border-white" 
+                                      style={{ backgroundColor: value }}
+                                    />
+                                    {value === '#FFFFFF' ? 'White' : value === '#000000' ? 'Black' : value}
+                                  </>
+                                ) : (
+                                  <span className="capitalize">{value}</span>
+                                )}
+                                <button
+                                  onClick={() => {
+                                    const newFilters = { ...filters };
+                                    newFilters[filterType] = newFilters[filterType].filter(item => item !== value);
+                                    setFilters(newFilters);
+                                  }}
+                                  className="ml-1 hover:bg-primary rounded-full p-0.5"
+                                >
+                                  <ApperIcon name="X" size={10} />
+                                </button>
+                              </span>
+                            ))
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="hidden md:flex items-center space-x-4 text-sm text-gray-600">
+                      <div className="flex items-center space-x-2">
+                        <ApperIcon name="Truck" className="w-4 h-4" />
+                        <span>Free shipping over $50</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <ApperIcon name="Shield" className="w-4 h-4" />
+                        <span>Quality guarantee</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <ProductGrid 
+                  products={filteredProducts}
+                  loading={loading}
+                  error={error}
+                  onRetry={loadProducts}
+                />
+              </motion.div>
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
 
       {/* Features Section */}
       <section className="py-20 bg-gradient-to-r from-gray-50 to-white">
