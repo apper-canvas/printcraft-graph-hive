@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import DesignCanvas from "@/components/organisms/DesignCanvas";
-import DesignUploader from "@/components/organisms/DesignUploader";
-import DesignControls from "@/components/molecules/DesignControls";
-import TemplateGallery from "@/components/molecules/TemplateGallery";
-import Button from "@/components/atoms/Button";
-import Badge from "@/components/atoms/Badge";
-import ApperIcon from "@/components/ApperIcon";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
+import SavedDesignsGallery from "@/components/molecules/SavedDesignsGallery";
 import { productService } from "@/services/api/productService";
 import { templateService } from "@/services/api/templateService";
 import { cartService } from "@/services/api/cartService";
-
+import { savedDesignService } from "@/services/api/savedDesignService";
+import ApperIcon from "@/components/ApperIcon";
+import DesignUploader from "@/components/organisms/DesignUploader";
+import DesignCanvas from "@/components/organisms/DesignCanvas";
+import DesignControls from "@/components/molecules/DesignControls";
+import TemplateGallery from "@/components/molecules/TemplateGallery";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import Button from "@/components/atoms/Button";
+import Badge from "@/components/atoms/Badge";
 const DesignStudio = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -34,7 +35,8 @@ const DesignStudio = () => {
   const [templates, setTemplates] = useState([]);
   const [templatesLoading, setTemplatesLoading] = useState(false);
   const [showTemplates, setShowTemplates] = useState(false);
-
+const [savedDesigns, setSavedDesigns] = useState([]);
+  const [showSavedDesigns, setShowSavedDesigns] = useState(false);
   // Load product
   const loadProduct = async () => {
     try {
@@ -63,11 +65,23 @@ const DesignStudio = () => {
       setTemplatesLoading(false);
     }
   };
-
+async function loadSavedDesigns() {
+    try {
+      const designs = await savedDesignService.getAll();
+      setSavedDesigns(designs);
+    } catch (error) {
+      console.error('Failed to load saved designs:', error);
+      toast.error('Failed to load saved designs');
+    }
+  }
   useEffect(() => {
     loadProduct();
     loadTemplates();
-  }, [productId]);
+}, [productId]);
+
+  useEffect(() => {
+    loadSavedDesigns();
+  }, []);
 
   // Design handlers
   const handleDesignUpload = (newDesign) => {
@@ -91,10 +105,59 @@ const DesignStudio = () => {
     setShowTemplates(false);
     toast.success(`Template "${template.name}" applied!`);
   };
+async function handleSaveDesign() {
+    if (!currentDesign) {
+      toast.error('No design to save');
+      return;
+    }
 
+    try {
+      const designName = `Design ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`;
+      await savedDesignService.create({
+        name: designName,
+        designUrl: currentDesign.url,
+        thumbnailUrl: currentDesign.url,
+        productId: product?.Id,
+        productName: product?.name
+      });
+      
+      toast.success('Design saved successfully!');
+      loadSavedDesigns();
+    } catch (error) {
+      console.error('Failed to save design:', error);
+      toast.error('Failed to save design');
+    }
+  }
+
+  function handleSelectSavedDesign(design) {
+    handleDesignUpdate({
+      url: design.designUrl,
+      name: design.name
+    });
+    setShowSavedDesigns(false);
+    toast.success(`Loaded design: ${design.name}`);
+  }
+
+  async function handleDeleteSavedDesign(designId) {
+    try {
+      await savedDesignService.delete(designId);
+      toast.success('Design deleted successfully');
+      loadSavedDesigns();
+    } catch (error) {
+      console.error('Failed to delete design:', error);
+      toast.error('Failed to delete design');
+    }
+  }
   const handleRemoveDesign = () => {
     setDesign(null);
     toast.info("Design removed");
+toast.info("Design removed");
+  };
+
+  const calculatePrice = () => {
+    const basePrice = product?.basePrice || 0;
+    const designFee = design ? 5 : 0;
+    return (basePrice + designFee) * quantity;
   };
 
   // Cart handler
@@ -124,12 +187,6 @@ const DesignStudio = () => {
     } catch (err) {
       toast.error("Failed to add to cart");
     }
-  };
-
-  const calculatePrice = () => {
-    const basePrice = product?.basePrice || 0;
-    const designFee = design ? 5 : 0;
-    return (basePrice + designFee) * quantity;
   };
 
   if (loading) return <Loading />;
@@ -165,8 +222,20 @@ const DesignStudio = () => {
             <div className="flex items-center space-x-4">
               <Badge variant="accent" size="lg" className="font-bold">
                 <ApperIcon name="DollarSign" className="w-4 h-4 mr-1" />
-                ${calculatePrice().toFixed(2)}
+${calculatePrice().toFixed(2)}
               </Badge>
+              {design && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleSaveDesign}
+                  onClick={handleSaveDesign}
+                  icon="Bookmark"
+                  className="ml-2"
+                >
+                  Save Design
+                </Button>
+              )}
               <Button
                 onClick={handleAddToCart}
                 disabled={!design}
@@ -286,7 +355,7 @@ const DesignStudio = () => {
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h3 className="font-medium text-gray-900 mb-4">Add More Designs</h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <Button
+<Button
                     variant="outline"
                     onClick={() => document.querySelector('input[type="file"]')?.click()}
                     icon="Upload"
@@ -299,6 +368,13 @@ const DesignStudio = () => {
                     icon="Palette"
                   >
                     Templates
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowSavedDesigns(true)}
+                    icon="Bookmark"
+                  >
+                    Saved Designs
                   </Button>
                 </div>
               </div>
@@ -339,6 +415,14 @@ const DesignStudio = () => {
         templates={templates}
         loading={templatesLoading}
         onSelectTemplate={handleTemplateSelect}
+      />
+<SavedDesignsGallery
+        isOpen={showSavedDesigns}
+        onClose={() => setShowSavedDesigns(false)}
+        savedDesigns={savedDesigns}
+        loading={false}
+        onSelectDesign={handleSelectSavedDesign}
+        onDeleteDesign={handleDeleteSavedDesign}
       />
     </div>
   );
