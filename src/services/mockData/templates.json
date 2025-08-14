@@ -1,0 +1,86 @@
+[
+  {
+    "Id": 1,
+    "name": "Vintage Badge",
+    "category": "vintage",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 2,
+    "name": "Mountain Adventure",
+    "category": "nature",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 3,
+    "name": "Geometric Pattern",
+    "category": "abstract",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 4,
+    "name": "Coffee Lover",
+    "category": "lifestyle",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 5,
+    "name": "Retro Sunset",
+    "category": "vintage",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 6,
+    "name": "Urban Street",
+    "category": "urban",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 7,
+    "name": "Ocean Wave",
+    "category": "nature",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 8,
+    "name": "Minimalist Logo",
+    "category": "abstract",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 9,
+    "name": "Fitness Motivation",
+    "category": "lifestyle",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 10,
+    "name": "Space Explorer",
+    "category": "abstract",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 11,
+    "name": "Grunge Texture",
+    "category": "vintage",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop"
+  },
+  {
+    "Id": 12,
+    "name": "City Skyline",
+    "category": "urban",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=200&h=200&fit=crop",
+    "designUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=300&fit=crop"
+  }
+]

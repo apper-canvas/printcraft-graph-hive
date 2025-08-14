@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'react-toastify/dist/ReactToastify.css';
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  .font-display {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .toast {
+    font-size: 14px !important;
+    border-radius: 8px !important;
+  }
+  
+  .Toastify__toast-container {
+    width: 320px !important;
+    z-index: 9999 !important;
+  }
+  
+  .Toastify__toast {
+    margin-bottom: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+.design-canvas {
+  position: relative;
+  overflow: hidden;
+}
+
+.draggable-design {
+  position: absolute;
+  cursor: move;
+  user-select: none;
+}
+
+.draggable-design:hover {
+  outline: 2px solid #5B21B6;
+}
+
+.resize-handle {
+  position: absolute;
+  background: #5B21B6;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+}
+
+.resize-handle.top-left { top: -6px; left: -6px; cursor: nw-resize; }
+.resize-handle.top-right { top: -6px; right: -6px; cursor: ne-resize; }
+.resize-handle.bottom-left { bottom: -6px; left: -6px; cursor: sw-resize; }
+.resize-handle.bottom-right { bottom: -6px; right: -6px; cursor: se-resize; }

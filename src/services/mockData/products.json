@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "name": "Classic T-Shirt",
+    "category": "apparel",
+    "basePrice": 19.99,
+    "colors": ["#FFFFFF", "#000000", "#FF0000", "#0000FF", "#00FF00"],
+    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "printAreas": ["front", "back"],
+    "mockupUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop"
+  },
+  {
+    "Id": 2,
+    "name": "Premium Hoodie",
+    "category": "apparel", 
+    "basePrice": 49.99,
+    "colors": ["#FFFFFF", "#000000", "#808080", "#FF0000"],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "printAreas": ["front", "back", "sleeve"],
+    "mockupUrl": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop"
+  },
+  {
+    "Id": 3,
+    "name": "Coffee Mug",
+    "category": "drinkware",
+    "basePrice": 14.99,
+    "colors": ["#FFFFFF", "#000000", "#FF0000", "#0000FF"],
+    "sizes": ["11oz", "15oz"],
+    "printAreas": ["wrap", "handle"],
+    "mockupUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=500&fit=crop"
+  },
+  {
+    "Id": 4,
+    "name": "Canvas Tote Bag",
+    "category": "bags",
+    "basePrice": 16.99,
+    "colors": ["#F5F5DC", "#000000", "#FF0000", "#0000FF"],
+    "sizes": ["Standard"],
+    "printAreas": ["front", "back"],
+    "mockupUrl": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=500&fit=crop"
+  },
+  {
+    "Id": 5,
+    "name": "Baseball Cap",
+    "category": "accessories",
+    "basePrice": 24.99,
+    "colors": ["#000000", "#FFFFFF", "#FF0000", "#0000FF", "#00FF00"],
+    "sizes": ["Adjustable"],
+    "printAreas": ["front", "back", "side"],
+    "mockupUrl": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=500&fit=crop"
+  },
+  {
+    "Id": 6,
+    "name": "Tank Top",
+    "category": "apparel",
+    "basePrice": 17.99,
+    "colors": ["#FFFFFF", "#000000", "#FF0000", "#FFFF00"],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "printAreas": ["front", "back"],
+    "mockupUrl": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=500&fit=crop"
+  },
+  {
+    "Id": 7,
+    "name": "Water Bottle",
+    "category": "drinkware",
+    "basePrice": 22.99,
+    "colors": ["#FFFFFF", "#000000", "#0000FF", "#FF1493"],
+    "sizes": ["20oz", "32oz"],
+    "printAreas": ["wrap"],
+    "mockupUrl": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=500&fit=crop"
+  },
+  {
+    "Id": 8,
+    "name": "Phone Case",
+    "category": "accessories",
+    "basePrice": 19.99,
+    "colors": ["#FFFFFF", "#000000", "#FF1493", "#00FFFF"],
+    "sizes": ["iPhone 14", "iPhone 14 Pro", "Samsung Galaxy"],
+    "printAreas": ["back"],
+    "mockupUrl": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=500&fit=crop"
+  }
+]
